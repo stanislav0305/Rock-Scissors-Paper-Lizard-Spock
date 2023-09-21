@@ -1,0 +1,51 @@
+@import variables
+@import mixins
+
+body
+	font: 100% $font-stack
+	color: $primary-color
+	background-color: $body-bg-color
+
+	.main-panel
+		text-align: center
+
+.battle-panel
+	width: 300px
+	margin-left: auto
+	margin-right: auto
+	margin-bottom: 20px
+
+	img
+		width: 150px
+		height: 150px
+
+.button
+	border: 1px solid #4e4e4e
+	width: 150px
+	height: 50px
+	margin: 2px
+	padding: 5px
+	&:hover
+		background-color: #c1c5c5
+		font-weight: bold
+
+.rock
+	@include figere(url('img/rock.png'))
+
+.scissors
+	@include figere(url('img/scissors.png'))
+
+.paper
+	@include figere(url('img/paper.png'))
+
+.lizards
+	@include figere(url('img/lizards.png'))
+
+.spock
+	@include figere(url('img/spock.png'))
+
+.d-block
+	display: block
+
+.margin-auto
+	margin: auto

@@ -1,0 +1,13 @@
+{
+  "scripts":{
+    "prestart": "npx sass ./sass/style.sass:./css/style.css",
+    "start": "npx tsc",
+    "startw": "npx tsc -w",
+    "sassw": "npx sass --watch ./sass/style.sass:./css/style.css"
+  },
+  "devDependencies": {
+    "npm-run-script": "^0.0.4",
+    "sass": "^1.67.0",
+    "typescript": "^5.2.2"
+  }
+}
