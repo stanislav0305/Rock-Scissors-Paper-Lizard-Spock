@@ -1,13 +1,35 @@
 {
-  "scripts":{
+  "scripts": {
+    "build-src": "npx sass ./sass/style.sass:./css/style.css --style compressed | npx gulp all-to-src | npx tsc ",
     "prestart": "npx sass ./sass/style.sass:./css/style.css",
     "start": "npx tsc",
     "startw": "npx tsc -w",
-    "sassw": "npx sass --watch ./sass/style.sass:./css/style.css"
+    "sassw": "npx sass --watch ./sass/style.sass:./src/css/style.css",
+    "sass-compresed": "npx sass ./sass/style.sass:./src/css/style.css --style compressed"
   },
   "devDependencies": {
+    "@types/node": "^20.6.3",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
     "npm-run-script": "^0.0.4",
     "sass": "^1.67.0",
     "typescript": "^5.2.2"
-  }
+  },
+  "browserslist": [
+    "last 1 major version",
+    ">= 1%",
+    "Chrome >= 45",
+    "Firefox >= 38",
+    "Edge >= 12",
+    "Explorer >= 10",
+    "iOS >= 9",
+    "Safari >= 9",
+    "Android >= 4.4",
+    "Opera >= 30"
+  ],
+  "//browserslist": [
+    "last 1 major version",
+    ">= 1%",
+    "IE 10"
+  ]
 }

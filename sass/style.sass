@@ -5,6 +5,8 @@ body
 	font: 100% $font-stack
 	color: $primary-color
 	background-color: $body-bg-color
+	background: $body-bg-color
+	background: linear-gradient(0deg, $body-bg-color 0%, $body-bg-white-color 100%)
 
 	.main-panel
 		text-align: center
@@ -30,22 +32,28 @@ body
 		font-weight: bold
 
 .rock
-	@include figere(url('img/rock.png'))
+	@include figere(url('../img/rock.png'))
 
 .scissors
-	@include figere(url('img/scissors.png'))
+	@include figere(url('../img/scissors.png'))
 
 .paper
-	@include figere(url('img/paper.png'))
+	@include figere(url('../img/paper.png'))
 
 .lizards
-	@include figere(url('img/lizards.png'))
+	@include figere(url('../img/lizards.png'))
 
 .spock
-	@include figere(url('img/spock.png'))
+	@include figere(url('../img/spock.png'))
 
 .d-block
 	display: block
 
 .margin-auto
 	margin: auto
+
+.d-fixed 
+	display: flex
+	justify-content: center
+	align-items: center
+	
