@@ -1,3 +1,5 @@
+const copyright = document.getElementById('copyrightYear') as HTMLSpanElement
+copyright.textContent = new Date().getFullYear().toString()
 
 const answerHeader = document.getElementById('answerHeader')! as HTMLSpanElement
 

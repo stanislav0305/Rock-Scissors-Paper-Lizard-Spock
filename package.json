@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build-src": "npx sass ./sass/style.sass:./css/style.css --style compressed | npx gulp all-to-src | npx tsc ",
+    "build-src": "npx sass ./src/sass/style.sass:./css/style.css --style compressed | npx gulp all-to-src | npx tsc ",
     "prestart": "npx sass ./sass/style.sass:./css/style.css",
     "start": "npx tsc",
     "startw": "npx tsc -w",
@@ -10,10 +10,19 @@
   "devDependencies": {
     "@types/node": "^20.6.3",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-file-include": "^2.3.0",
+    "gulp-if": "^3.0.0",
+    "gulp-imagemin": "^7.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-server-livereload": "^1.0.1",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "npm-run-script": "^0.0.4",
-    "sass": "^1.67.0",
-    "typescript": "^5.2.2"
+    "sass": "^1.68.0",
+    "typescript": "^5.2.2",
+    "yargs": "^17.7.2"
   },
   "browserslist": [
     "last 1 major version",

@@ -1,11 +1,16 @@
 <!DOCTYPE html>
+<html lang="ru">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Камень, ножнецы, бумага, ящерица, Спок</title>
+    <link rel="icon" type="image/x-icon" href="css/img/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <h1>Камень, ножнецы, бумага, ящерица, Спок</h1>
+    @@include('./blocks/header.html')
     <div class="main-panel">
         <div class="battle-panel">
             <img id="botAnswerImg" />
@@ -22,8 +27,9 @@
         </div>
         <button id="playAgainBtn" class="button margin-auto" style="display: none;">Сыграть ещё</button>
     </div>
+    @@include('./blocks/footer.html')
 
-    <script default src="js/app.js"></script>
+    <script default src="js/app.js" charset="utf-8"></script>
 </body>
 
 </html>
