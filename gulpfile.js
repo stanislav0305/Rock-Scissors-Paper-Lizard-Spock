@@ -14,6 +14,9 @@ const ts = require('gulp-typescript');
 const tsProject = ts.createProject('tsconfig.json', { noImplicitAny: true });
 const serverLivereload = require('gulp-server-livereload');
 
+const webpack = require('webpack-stream');
+const changed = require('gulp-changed');
+
 const isProd = args.prod;
 
 gulp.task('start-info', function (done) {
@@ -55,15 +58,18 @@ gulp.task('build-html', function () {
         basepath: '@file'
     };
 
-    return gulp.src('./src/*.html')
+    return gulp.src('./src/html/*.html')
         .pipe(fileInclude(fileIncludeSettings))
         .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('copy-images', function () {
-    return gulp.src('./src/sass/img/*.*')
-        .pipe(imagemin([imagemin.optipng({ optimizationLevel: 5 })]))
-        .pipe(gulp.dest('./dist/css/img/'));
+    const dist = './dist/img/'
+
+    return gulp.src('./src/img/*.*')
+        .pipe(changed(dist))
+        .pipe(imagemin({ verbose: true }))
+        .pipe(gulp.dest(dist));
 });
 
 gulp.task('build-css', function () {
@@ -80,8 +86,9 @@ gulp.task('build-css', function () {
 
 
 gulp.task('build-js', function () {
-    return gulp.src('./src/*.ts')
+    return gulp.src('./src/ts/**/*.ts')
         .pipe(tsProject())
+        .pipe(webpack(require('./webpack.config.js')))
         .pipe(gulp.dest('./dist/js'));
 });
 
@@ -92,12 +99,12 @@ gulp.task('watch', function (done) {
         return;
     }
 
-    gulp.watch('./src/**/*.html', gulp.parallel('build-html'));
+    gulp.watch('./src/html/**/*.html', gulp.parallel('build-html'));
     gulp.watch('./src/sass/**/*.sass', gulp.parallel('build-css'));
     //добавляет новые картинки, но ничего не удаляет из dist 
     //т.е. при удалении картинки в src она не удалится в dist
-    gulp.watch('./src/sass/img/**/*', gulp.parallel('copy-images'));
-    gulp.watch('./src/*.ts', gulp.parallel('build-js'));
+    gulp.watch('./src/img/**/*', gulp.parallel('copy-images'));
+    gulp.watch('./src/ts/**/*.ts', gulp.parallel('build-js'));
 })
 
 gulp.task('default',

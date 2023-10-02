@@ -1,3 +1,8 @@
+import { figureArr, Figure } from './figureArr'
+import { gameResults } from './gameResults'
+import WinResult from './winResult'
+
+
 const copyright = document.getElementById('copyrightYear') as HTMLSpanElement
 copyright.textContent = new Date().getFullYear().toString()
 
@@ -12,28 +17,7 @@ const playAgainBtn = document.getElementById('playAgainBtn') as HTMLButtonElemen
 const buttons = document.querySelectorAll('.ansver-panel > button') as NodeListOf<HTMLButtonElement>
 
 
-//array to type
-const figureArr = ['Rock', 'Scissors', 'Paper', 'Lizards', 'Spock'] as const
-type Figure = typeof figureArr[number]
 
-// !!! Как исключить 'Rock-Rock' и остальные не существующие комбинации? Нужно ли?
-const gameResults: Map<`${Figure}-${Figure}`, string> = new Map([
-    ['Rock-Scissors', 'Камень ломает ножницы.'],
-    ['Rock-Lizards', 'Камень бьёт ящерицу.'],
-    ['Scissors-Paper', 'Ножницы режут бумагу.'],
-    ['Scissors-Lizards', 'Ножницы обезглавливают ящерицу.'],
-    ['Paper-Spock', 'Бумага опровергает Спока.'],
-    ['Paper-Rock', 'Бумага накрывает камень.'],
-    ['Lizards-Paper', 'Ящерицу съедает бумагу.'],
-    ['Lizards-Spock', 'Ящерица отравляет Спока.'],
-    ['Spock-Scissors', 'Спок ломает ножницы.'],
-    ['Spock-Rock', 'Спок испаряет камень.'],
-])
-
-class WinResult {
-    Header: string = '';
-    Win?: boolean
-}
 
 playAgainBtn.onclick = function (event) {
     event.preventDefault();
