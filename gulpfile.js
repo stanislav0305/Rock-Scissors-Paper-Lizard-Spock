@@ -3,19 +3,26 @@ const args = require('yargs').argv;
 
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
-
 const clean = require('gulp-clean');
+const serverLivereload = require('gulp-server-livereload');
+const webpack = require('webpack-stream');
+const changed = require('gulp-changed');
+
+//HTML
 const fileInclude = require('gulp-file-include');
+
+//CSS
 const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
+
+//IMG
 const imagemin = require('gulp-imagemin');
+
+//JS
 const ts = require('gulp-typescript');
 const tsProject = ts.createProject('tsconfig.json', { noImplicitAny: true });
-const serverLivereload = require('gulp-server-livereload');
 
-const webpack = require('webpack-stream');
-const changed = require('gulp-changed');
 
 const isProd = args.prod;
 
