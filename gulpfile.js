@@ -53,43 +53,50 @@ gulp.task('start-server-livereload', function (done) {
 });
 
 gulp.task('build-html', function () {
+    const dist = './dist/'
     const fileIncludeSettings = {
         prefix: '@@',
         basepath: '@file'
     };
 
-    return gulp.src('./src/html/*.html')
+    return gulp.src(['./src/html/**/*.html', '!./src/html/blocks/*.html'])
+        .pipe(gulpif(!isProd, changed(dist)))
         .pipe(fileInclude(fileIncludeSettings))
-        .pipe(gulp.dest('./dist/'));
+        .pipe(gulp.dest(dist));
 });
 
 gulp.task('copy-images', function () {
     const dist = './dist/img/'
 
     return gulp.src('./src/img/*.*')
-        .pipe(changed(dist))
+        .pipe(gulpif(!isProd, changed(dist)))
         .pipe(imagemin({ verbose: true }))
         .pipe(gulp.dest(dist));
 });
 
 gulp.task('build-css', function () {
+    const dist = './dist/css/'
     const cssStyle = isProd ? 'compressed' : 'expanded';
 
     return gulp.src('./src/sass/style.sass')
+        .pipe(gulpif(!isProd, changed(dist)))
         .pipe(gulpif(!isProd, sourcemaps.init()))
         .pipe(sass({ outputStyle: cssStyle }).on('error', sass.logError))
         .pipe(gulpif(isProd, autoprefixer({ cascade: false })))
         .pipe(gulpif(!isProd, sourcemaps.write('./')))
-        .pipe(gulp.dest('./dist/css/'));
+        .pipe(gulp.dest(dist));
 
 });
 
 
 gulp.task('build-js', function () {
+    const dist = './dist/js'
+
     return gulp.src('./src/ts/**/*.ts')
+        .pipe(gulpif(!isProd, changed(dist)))
         .pipe(tsProject())
         .pipe(webpack(require('./webpack.config.js')))
-        .pipe(gulp.dest('./dist/js'));
+        .pipe(gulp.dest(dist));
 });
 
 
