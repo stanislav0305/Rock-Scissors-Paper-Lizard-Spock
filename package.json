@@ -21,6 +21,7 @@
     "gulp-if": "^3.0.0",
     "gulp-imagemin": "^7.0.0",
     "gulp-sass": "^5.1.0",
+    "gulp-sass-glob": "^1.1.0",
     "gulp-server-livereload": "^1.0.1",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
