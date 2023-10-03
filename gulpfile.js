@@ -10,15 +10,18 @@ const changed = require('gulp-changed');
 
 // HTML
 const fileInclude = require('gulp-file-include');
+const webpHTML = require('gulp-webp-html-nosvg');
 
 // CSS
 const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
 const sassGlob = require('gulp-sass-glob');
+const webpCss = require('gulp-webp-css');
 
 // IMG
 const imagemin = require('gulp-imagemin');
+const webp = require('gulp-webp');
 
 // JS
 const ts = require('gulp-typescript');
@@ -73,14 +76,20 @@ gulp.task('build-html', function () {
     return gulp.src(['./src/html/**/*.html', '!./src/html/blocks/*.html'])
         .pipe(gulpif(!isProd, changed(dist)))
         .pipe(fileInclude(fileIncludeSettings))
+        .pipe(webpHTML())
         .pipe(gulp.dest(dist));
 });
 
 
 gulp.task('copy-images', function () {
+    const src = './src/img/*.*'
     const dist = './dist/img/'
 
-    return gulp.src('./src/img/*.*')
+    return gulp.src(src)
+        .pipe(gulpif(!isProd, changed(dist)))
+        .pipe(webp())
+        .pipe(gulp.dest(dist))
+        .pipe(gulp.src(src))
         .pipe(gulpif(!isProd, changed(dist)))
         .pipe(imagemin({ verbose: true }))
         .pipe(gulp.dest(dist));
@@ -96,6 +105,7 @@ gulp.task('build-css', function () {
         .pipe(gulpif(!isProd, sourcemaps.init()))
         .pipe(sassGlob())
         .pipe(sass({ outputStyle: cssStyle }).on('error', sass.logError))
+        .pipe(webpCss())
         .pipe(gulpif(isProd, autoprefixer({ cascade: false })))
         .pipe(gulpif(!isProd, sourcemaps.write('./')))
         .pipe(gulp.dest(dist));
