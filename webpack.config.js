@@ -1,7 +1,10 @@
 const path = require('path');
+const args = require('yargs').argv;
+
+const isProd = args.prod;
 
 module.exports = {
-    mode: 'production',
+    mode: isProd ? 'production' : 'development',
     entry: './src/ts/app.ts',
     module: {
         rules: [
