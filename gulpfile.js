@@ -74,7 +74,8 @@ gulp.task('build-html', function () {
     };
 
     return gulp.src(['./src/html/**/*.html', '!./src/html/blocks/*.html'])
-        .pipe(gulpif(!isProd, changed(dist)))
+        //{hasChanged: changed.compareContents} - change page if was changed block html file
+        .pipe(gulpif(!isProd, changed(dist, {hasChanged: changed.compareContents})))
         .pipe(fileInclude(fileIncludeSettings))
         .pipe(webpHTML())
         .pipe(gulp.dest(dist));
