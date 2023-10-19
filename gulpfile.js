@@ -27,7 +27,6 @@ const webp = require('gulp-webp');
 const ts = require('gulp-typescript');
 const tsProject = ts.createProject('tsconfig.json', { noImplicitAny: true });
 
-
 const isProd = args.prod;
 const distDir = isProd ? 'prod' : 'dev';
 
@@ -36,7 +35,6 @@ gulp.task('start-info', function (done) {
     console.log(envDescription);
     done();
 });
-
 
 gulp.task('clean', function () {
     //allowEmpty - разрешает пустой поток (когда папка distDir несуществует)
@@ -48,7 +46,6 @@ gulp.task('clean', function () {
     return gulp.src(`./${distDir}/`, options)
         .pipe(gulpif(fs.existsSync(`./${distDir}`) === true, clean({ force: true })));
 });
-
 
 gulp.task('start-server-livereload', function (done) {
     if (isProd) {
@@ -66,7 +63,6 @@ gulp.task('start-server-livereload', function (done) {
         .pipe(gulpif(!isProd, serverLivereload(serverLivereloadSettings)));
 });
 
-
 gulp.task('build-html', function () {
     const dist = `./${distDir}/`;
     const fileIncludeSettings = {
@@ -82,10 +78,9 @@ gulp.task('build-html', function () {
         .pipe(gulp.dest(dist));
 });
 
-
 gulp.task('copy-images', function () {
-    const src = './src/img/*.*'
-    const dist = `./${distDir}/img/`
+    const src = './src/assets/img/*.*'
+    const dist = `./${distDir}/assets/img/`
 
     return gulp.src(src)
         .pipe(gulpif(!isProd, changed(dist)))
@@ -97,12 +92,11 @@ gulp.task('copy-images', function () {
         .pipe(gulp.dest(dist));
 });
 
-
 gulp.task('build-css', function () {
-    const dist = `./${distDir}/css/`
+    const dist = `./${distDir}/assets/css/`
     const cssStyle = isProd ? 'compressed' : 'expanded';
 
-    return gulp.src('./src/sass/style.sass')
+    return gulp.src('./src/assets/sass/style.sass')
         .pipe(gulpif(!isProd, changed(dist)))
         .pipe(gulpif(!isProd, sourcemaps.init()))
         .pipe(sassGlob())
@@ -111,9 +105,7 @@ gulp.task('build-css', function () {
         .pipe(gulpif(isProd, autoprefixer({ cascade: false })))
         .pipe(gulpif(!isProd, sourcemaps.write('./')))
         .pipe(gulp.dest(dist));
-
 });
-
 
 gulp.task('build-js', function () {
     const dist = `./${distDir}/js`
@@ -125,7 +117,6 @@ gulp.task('build-js', function () {
         .pipe(gulp.dest(dist));
 });
 
-
 gulp.task('watch', function (done) {
     if (isProd) {
         done();
@@ -133,13 +124,12 @@ gulp.task('watch', function (done) {
     }
 
     gulp.watch('./src/html/**/*.html', gulp.parallel('build-html'));
-    gulp.watch('./src/sass/**/*.sass', gulp.parallel('build-css'));
+    gulp.watch('./src/assets/sass/**/*.sass', gulp.parallel('build-css'));
     //добавляет новые картинки, но ничего не удаляет из distDir
     //т.е. при удалении картинки в src она не удалится в distDir
-    gulp.watch('./src/img/**/*', gulp.parallel('copy-images'));
+    gulp.watch('./src/assets/img/**/*', gulp.parallel('copy-images'));
     gulp.watch('./src/ts/**/*.ts', gulp.parallel('build-js'));
 })
-
 
 gulp.task('default',
     gulp.series(
@@ -148,5 +138,4 @@ gulp.task('default',
         gulp.parallel('build-html', 'copy-images', 'build-css', 'build-js'),
         gulp.parallel('start-server-livereload', 'watch')
     )
-);
-
+)
