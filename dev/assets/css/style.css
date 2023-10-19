@@ -1,4 +1,4 @@
-.footer {
+footer {
   flex: 0 0 auto;
   background-color: #333;
   text-align: center;
@@ -8,7 +8,7 @@
   font-size: 11px;
 }
 
-.header {
+header {
   background-color: #fff;
 }
 
@@ -107,6 +107,34 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.-pre-menu-post- {
+  color: red;
+}
+
+.-pre-menu_top-post- {
+  color: black;
+}
+
+.-pre-menu_item-post- {
+  color: green;
+}
+
+.-pre-menu_item_active-post- {
+  color: blue;
+}
+
+.-pre-menu_item_active-post-::before {
+  content: "active";
+}
+
+.-my-zasdasd {
+  content: "active";
+}
+
+#-my-zxczxc {
+  color: red;
 }
 @supports (-webkit-appearance:none){
 .rock{background-image:url("../img/rock.webp")}

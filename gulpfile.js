@@ -72,7 +72,7 @@ gulp.task('build-html', function () {
 
     return gulp.src(['./src/html/**/*.html', '!./src/html/blocks/*.html'])
         //{hasChanged: changed.compareContents} - change page if was changed block html file
-        .pipe(gulpif(!isProd, changed(dist, {hasChanged: changed.compareContents})))
+        .pipe(gulpif(!isProd, changed(dist, { hasChanged: changed.compareContents })))
         .pipe(fileInclude(fileIncludeSettings))
         .pipe(webpHTML())
         .pipe(gulp.dest(dist));
@@ -129,7 +129,7 @@ gulp.task('watch', function (done) {
     //т.е. при удалении картинки в src она не удалится в distDir
     gulp.watch('./src/assets/img/**/*', gulp.parallel('copy-images'));
     gulp.watch('./src/ts/**/*.ts', gulp.parallel('build-js'));
-})
+});
 
 gulp.task('default',
     gulp.series(
@@ -138,4 +138,4 @@ gulp.task('default',
         gulp.parallel('build-html', 'copy-images', 'build-css', 'build-js'),
         gulp.parallel('start-server-livereload', 'watch')
     )
-)
+);
