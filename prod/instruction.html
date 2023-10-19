@@ -12,14 +12,25 @@
 <body>
     <div class="wrapper">
         <div class="content">
-            @@include('blocks/header.html')
+            <header class="header">
+    <h1>Камень, ножнецы, бумага, ящерица, Спок</h1>
+</header>
             <div class="page-nav">
                 <a href="./index.html">
                     << Назад</a>
             </div>
-            @@include('blocks/instructionSсheme.html')
+            <div>
+    <picture><source srcset="../img/gameInstruction.webp" type="image/webp"><img src="../img/gameInstruction.png"/></picture>
+</div>
         </div>
-        @@include('blocks/footer.html')
+        <footer class="footer">
+    <span>&copy; Торман С. В.,
+        <span id="copyrightYear"></span>
+</footer>
+
+<script type="text/javascript">
+    document.getElementById('copyrightYear').innerText = new Date().getFullYear();
+</script>
     </div>
 </body>
 

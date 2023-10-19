@@ -1,3 +1,8 @@
 <footer class="footer">
-    <span>&copy; Торман С. В., <span id="copyrightYear"></span>
+    <span>&copy; Торман С. В.,
+        <span id="copyrightYear"></span>
 </footer>
+
+<script type="text/javascript">
+    document.getElementById('copyrightYear').innerText = new Date().getFullYear();
+</script>

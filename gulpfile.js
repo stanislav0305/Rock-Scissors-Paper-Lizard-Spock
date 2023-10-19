@@ -29,6 +29,7 @@ const tsProject = ts.createProject('tsconfig.json', { noImplicitAny: true });
 
 
 const isProd = args.prod;
+const distDir = isProd ? 'prod' : 'dev';
 
 gulp.task('start-info', function (done) {
     const envDescription = isProd ? '--- PRODUCTION ---' : '--- DEVELOPMENT ---';
@@ -38,14 +39,14 @@ gulp.task('start-info', function (done) {
 
 
 gulp.task('clean', function () {
-    //allowEmpty - разрешает пустой поток (когда папка dist несуществует)
+    //allowEmpty - разрешает пустой поток (когда папка distDir несуществует)
     const options = {
         read: false,
         allowEmpty: true
     }
 
-    return gulp.src('./dist/', options)
-        .pipe(gulpif(fs.existsSync('./dist') === true, clean({ force: true })));
+    return gulp.src(`./${distDir}/`, options)
+        .pipe(gulpif(fs.existsSync(`./${distDir}`) === true, clean({ force: true })));
 });
 
 
@@ -61,13 +62,13 @@ gulp.task('start-server-livereload', function (done) {
         port: 8005
     };
 
-    return gulp.src('./dist', { allowEmpty: true })
+    return gulp.src(`./${distDir}`, { allowEmpty: true })
         .pipe(gulpif(!isProd, serverLivereload(serverLivereloadSettings)));
 });
 
 
 gulp.task('build-html', function () {
-    const dist = './dist/'
+    const dist = `./${distDir}/`;
     const fileIncludeSettings = {
         prefix: '@@',
         basepath: '@file'
@@ -84,7 +85,7 @@ gulp.task('build-html', function () {
 
 gulp.task('copy-images', function () {
     const src = './src/img/*.*'
-    const dist = './dist/img/'
+    const dist = `./${distDir}/img/`
 
     return gulp.src(src)
         .pipe(gulpif(!isProd, changed(dist)))
@@ -98,7 +99,7 @@ gulp.task('copy-images', function () {
 
 
 gulp.task('build-css', function () {
-    const dist = './dist/css/'
+    const dist = `./${distDir}/css/`
     const cssStyle = isProd ? 'compressed' : 'expanded';
 
     return gulp.src('./src/sass/style.sass')
@@ -115,7 +116,7 @@ gulp.task('build-css', function () {
 
 
 gulp.task('build-js', function () {
-    const dist = './dist/js'
+    const dist = `./${distDir}/js`
 
     return gulp.src('./src/ts/**/*.ts')
         .pipe(gulpif(!isProd, changed(dist)))
@@ -133,8 +134,8 @@ gulp.task('watch', function (done) {
 
     gulp.watch('./src/html/**/*.html', gulp.parallel('build-html'));
     gulp.watch('./src/sass/**/*.sass', gulp.parallel('build-css'));
-    //добавляет новые картинки, но ничего не удаляет из dist 
-    //т.е. при удалении картинки в src она не удалится в dist
+    //добавляет новые картинки, но ничего не удаляет из distDir
+    //т.е. при удалении картинки в src она не удалится в distDir
     gulp.watch('./src/img/**/*', gulp.parallel('copy-images'));
     gulp.watch('./src/ts/**/*.ts', gulp.parallel('build-js'));
 })

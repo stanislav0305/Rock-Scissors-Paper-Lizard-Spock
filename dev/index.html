@@ -12,7 +12,9 @@
 <body>
     <div class="wrapper">
         <div class="content">
-            @@include('blocks/header.html')
+            <header class="header">
+    <h1>Камень, ножнецы, бумага, ящерица, Спок</h1>
+</header>
             <div class="page-nav">
                 <a href="./instruction.html">Инструкция >></a>
             </div>
@@ -31,7 +33,14 @@
             </div>
             <button id="playAgainBtn" class="button margin-x-auto" style="display: none;">Сыграть ещё</button>
         </div>
-        @@include('blocks/footer.html')
+        <footer class="footer">
+    <span>&copy; Торман С. В.,
+        <span id="copyrightYear"></span>
+</footer>
+
+<script type="text/javascript">
+    document.getElementById('copyrightYear').innerText = new Date().getFullYear();
+</script>
     </div>
 
     <script src="js/main.bundle.js"></script>

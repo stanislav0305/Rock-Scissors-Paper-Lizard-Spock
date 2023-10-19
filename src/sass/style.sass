@@ -2,16 +2,25 @@
 @import mixins
 @import './blocks/*.sass'
 
-body
+*
 	margin: 0
+	padding: 0
+
+html, body
+	height: 100%
 	font: 100% $font-stack
 	color: $primary-color
 
-.main-panel
+.wrapper
+	display: flex
+	flex-direction: column
+	height: 100%
+
+.content
+	flex: 1 0 auto
 	text-align: center
 	background-color: $body-bg-color
 	background: linear-gradient(0deg, $body-bg-color 0%, $body-bg-white-color 100%)
-	padding: 0 10px 10px 10px
 
 .page-nav
 	text-align: left
@@ -51,11 +60,9 @@ body
 .spock
 	@include figere(url('../img/spock.png'))
 
-.d-block
-	display: block
-
-.margin-auto
-	margin: auto
+.margin-x-auto
+	margin-left: auto
+	margin-right: auto
 
 .d-fixed
 	display: flex

@@ -10,20 +10,28 @@
 </head>
 
 <body>
-    <header class="header">
+    <div class="wrapper">
+        <div class="content">
+            <header class="header">
     <h1>Камень, ножнецы, бумага, ящерица, Спок</h1>
 </header>
-    <div class="main-panel">
-        <div class="page-nav">
-            <a href="./index.html"><< Назад</a>
-        </div>
-        <div>
+            <div class="page-nav">
+                <a href="./index.html">
+                    << Назад</a>
+            </div>
+            <div>
     <picture><source srcset="../img/gameInstruction.webp" type="image/webp"><img src="../img/gameInstruction.png"/></picture>
 </div>
-    </div>
-    <footer class="footer">
-    <span>&copy; Торман С. В., <span id="copyrightYear"></span>
+        </div>
+        <footer class="footer">
+    <span>&copy; Торман С. В.,
+        <span id="copyrightYear"></span>
 </footer>
+
+<script type="text/javascript">
+    document.getElementById('copyrightYear').innerText = new Date().getFullYear();
+</script>
+    </div>
 </body>
 
 </html>
