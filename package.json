@@ -47,10 +47,5 @@
     "Safari >= 9",
     "Android >= 4.4",
     "Opera >= 30"
-  ],
-  "//browserslist": [
-    "last 1 major version",
-    ">= 1%",
-    "IE 10"
   ]
 }

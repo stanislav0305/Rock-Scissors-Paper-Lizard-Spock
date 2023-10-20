@@ -37,10 +37,9 @@ gulp.task('start-info', function (done) {
 });
 
 gulp.task('clean', function () {
-    //allowEmpty - разрешает пустой поток (когда папка distDir несуществует)
     const options = {
         read: false,
-        allowEmpty: true
+        allowEmpty: true //- разрешает пустой поток (когда папка distDir несуществует)
     }
 
     return gulp.src(`./${distDir}/`, options)
@@ -71,7 +70,7 @@ gulp.task('build-html', function () {
     };
 
     return gulp.src(['./src/html/**/*.html', '!./src/html/blocks/*.html'])
-        //{hasChanged: changed.compareContents} - change page if was changed block html file
+        //{hasChanged: changed.compareContents} - изменяет страницу если были изменения файл с фрагментом html
         .pipe(gulpif(!isProd, changed(dist, { hasChanged: changed.compareContents })))
         .pipe(fileInclude(fileIncludeSettings))
         .pipe(webpHTML())
@@ -125,8 +124,7 @@ gulp.task('watch', function (done) {
 
     gulp.watch('./src/html/**/*.html', gulp.parallel('build-html'));
     gulp.watch('./src/assets/sass/**/*.sass', gulp.parallel('build-css'));
-    //добавляет новые картинки, но ничего не удаляет из distDir
-    //т.е. при удалении картинки в src она не удалится в distDir
+    //(добавляет новые картинки в distDir, но при удалении картинки в src она не удалится в distDir
     gulp.watch('./src/assets/img/**/*', gulp.parallel('copy-images'));
     gulp.watch('./src/ts/**/*.ts', gulp.parallel('build-js'));
 });

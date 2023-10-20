@@ -1,6 +1,5 @@
 import { Figure } from './figureArr'
 
-// !!! Как исключить 'Rock-Rock' и остальные не существующие комбинации? Нужно ли?
 export const WinHeaders: Map<`${Figure}-${Figure}`, string> = new Map([
     ['Rock-Scissors', 'Камень ломает ножницы.'],
     ['Rock-Lizards', 'Камень бьёт ящерицу.'],
