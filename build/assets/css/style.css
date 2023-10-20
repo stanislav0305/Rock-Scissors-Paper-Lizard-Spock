@@ -32,6 +32,7 @@ html, body {
 .content {
   flex: 1 0 auto;
   text-align: center;
+  padding: 0 10px 0 10px;
   background-color: #b7afaf;
   background: linear-gradient(0deg, #b7afaf 0%, #fff 100%);
 }
