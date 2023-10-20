@@ -28,7 +28,7 @@ const ts = require('gulp-typescript');
 const tsProject = ts.createProject('tsconfig.json', { noImplicitAny: true });
 
 const isProd = args.prod;
-const distDir = isProd ? 'prod' : 'dev';
+const distDir = isProd ? 'docs' : 'build';
 
 gulp.task('start-info', function (done) {
     const envDescription = isProd ? '--- PRODUCTION ---' : '--- DEVELOPMENT ---';
