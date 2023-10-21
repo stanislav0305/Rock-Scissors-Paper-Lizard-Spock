@@ -1,11 +1,7 @@
 {
   "scripts": {
-    "build-src": "npx sass ./src/sass/style.sass:./css/style.css --style compressed | npx gulp all-to-src | npx tsc ",
-    "prestart": "npx sass ./sass/style.sass:./css/style.css",
-    "start": "npx tsc",
-    "startw": "npx tsc -w",
-    "sassw": "npx sass --watch ./sass/style.sass:./src/css/style.css",
-    "sass-compresed": "npx sass ./sass/style.sass:./src/css/style.css --style compressed"
+    "start": "gulp",
+    "build-prod": "gulp --prod"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
