@@ -28,6 +28,7 @@ const ts = require('gulp-typescript');
 const tsProject = ts.createProject('tsconfig.json', { noImplicitAny: true });
 
 const isProd = args.prod;
+const isDev = !isProd;
 const distDir = isProd ? 'docs' : 'build';
 
 gulp.task('start-info', function (done) {
@@ -59,7 +60,7 @@ gulp.task('start-server-livereload', function (done) {
     };
 
     return gulp.src(`./${distDir}`, { allowEmpty: true })
-        .pipe(gulpif(!isProd, serverLivereload(serverLivereloadSettings)));
+        .pipe(gulpif(isDev, serverLivereload(serverLivereloadSettings)));
 });
 
 gulp.task('build-html', function () {
@@ -71,7 +72,7 @@ gulp.task('build-html', function () {
 
     return gulp.src(['./src/html/**/*.html', '!./src/html/blocks/*.html'])
         //{hasChanged: changed.compareContents} - изменяет страницу если были изменения файл с фрагментом html
-        .pipe(gulpif(!isProd, changed(dist, { hasChanged: changed.compareContents })))
+        .pipe(gulpif(isDev, changed(dist, { hasChanged: changed.compareContents })))
         .pipe(fileInclude(fileIncludeSettings))
         .pipe(webpHTML())
         .pipe(gulp.dest(dist));
@@ -82,11 +83,11 @@ gulp.task('copy-images', function () {
     const dist = `./${distDir}/assets/img/`
 
     return gulp.src(src)
-        .pipe(gulpif(!isProd, changed(dist)))
+        .pipe(gulpif(isDev, changed(dist)))
         .pipe(webp())
         .pipe(gulp.dest(dist))
         .pipe(gulp.src(src))
-        .pipe(gulpif(!isProd, changed(dist)))
+        .pipe(gulpif(isDev, changed(dist)))
         .pipe(imagemin({ verbose: true }))
         .pipe(gulp.dest(dist));
 });
@@ -96,13 +97,13 @@ gulp.task('build-css', function () {
     const cssStyle = isProd ? 'compressed' : 'expanded';
 
     return gulp.src('./src/assets/sass/style.sass')
-        .pipe(gulpif(!isProd, changed(dist)))
-        .pipe(gulpif(!isProd, sourcemaps.init()))
+        .pipe(gulpif(isDev, changed(dist)))
+        .pipe(gulpif(isDev, sourcemaps.init()))
         .pipe(sassGlob())
         .pipe(sass({ outputStyle: cssStyle }).on('error', sass.logError))
         .pipe(webpCss())
         .pipe(gulpif(isProd, autoprefixer({ cascade: false })))
-        .pipe(gulpif(!isProd, sourcemaps.write('./')))
+        .pipe(gulpif(isDev, sourcemaps.write('./')))
         .pipe(gulp.dest(dist));
 });
 
@@ -110,7 +111,7 @@ gulp.task('build-js', function () {
     const dist = `./${distDir}/js`
 
     return gulp.src('./src/ts/**/*.ts')
-        .pipe(gulpif(!isProd, changed(dist)))
+        .pipe(gulpif(isDev, changed(dist)))
         .pipe(tsProject())
         .pipe(webpack(require('./webpack.config.js')))
         .pipe(gulp.dest(dist));

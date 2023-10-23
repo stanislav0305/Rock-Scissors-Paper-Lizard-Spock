@@ -1,6 +1,10 @@
 import { Figure, genirateFigure } from './figureArr'
 import GameResult from './gameResult'
 
+//for IE
+import 'core-js/actual'
+
+
 const answerHeader = document.getElementById('answerHeader')! as HTMLHeadingElement
 
 const playerImg = document.getElementById('playerImg') as HTMLImageElement

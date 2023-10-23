@@ -1,5 +1,8 @@
 import { Figure } from './figureArr'
 
+//for IE
+import 'core-js/actual/map'
+
 export const WinHeaders: Map<`${Figure}-${Figure}`, string> = new Map([
     ['Rock-Scissors', 'Камень ломает ножницы.'],
     ['Rock-Lizards', 'Камень бьёт ящерицу.'],
