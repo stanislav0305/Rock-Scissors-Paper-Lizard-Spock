@@ -74,7 +74,7 @@
     - [gulp-changed](https://www.npmjs.com/package/gulp-changed) - для отслеживания изменений файлов;
     - [gulp-server-livereload](https://www.npmjs.com/package/gulp-server-livereload) - плагин **Gulp** для запуска локального веб-сервера с живой перезагрузкой;
 
-- Для работы с файлами изобажений:
+- Для работы с файлами изображений:
     - [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin) - уменьшает объём изображения в форматах PNG, JPEG, GIF и SVG;
     - [gulp-webp](https://www.npmjs.com/package/gulp-webp) - плагин gulp для конвертации изображений в формат WebP;
 
